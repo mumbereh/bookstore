@@ -31,8 +31,7 @@
 <!-- PROJECT DESCRIPTION -->
 
 # 📖 [ Book Store ] <a name="about-project"></a>
-
-**[ Book Store ]**  The Book Store app facilitates adding books with title and author details, as well as deleting entries. It encompasses three categories: "Book," "New Book," and "Categories," streamlining book management and offering diverse options for users' convenience.
+The Book Store app facilitates adding books with title and author details, as well as deleting entries. It encompasses three categories: "Book," "New Book," and "Categories," streamlining book management and offering diverse options for users' convenience.
 
 ## 🛠 Built With <a name="built-with"></a>
 
