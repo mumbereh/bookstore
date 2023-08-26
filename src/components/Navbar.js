@@ -7,10 +7,14 @@ const Navbar = () => (
     <nav>
       <ul>
         <li>
-          <NavLink to="/">BOOKS</NavLink>
+          <NavLink to="/" activeClassName="active-link" exact>
+            BOOKS
+          </NavLink>
         </li>
         <li>
-          <NavLink to="/categories">CATEGORIES</NavLink>
+          <NavLink to="/categories" activeClassName="active-link">
+            CATEGORIES
+          </NavLink>
         </li>
       </ul>
     </nav>
