@@ -13,7 +13,7 @@ const Form = ({ addBook }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Book title"
