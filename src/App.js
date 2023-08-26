@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Navbar';
 import Books from './components/Book';
-import Categories from './components/Categories.js';
+import Categories from './components/Categories';
 import Form from './components/Form';
 import './App.css';
 
