@@ -1,16 +1,19 @@
+/* Reset some default styling */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
+/* Header Styles */
 header {
-  background-color: #333; 
+  background-color: #333;
   color: white;
   text-align: center;
   padding: 1rem;
 }
 
+/* Navigation Styles */
 nav ul {
   list-style: none;
   display: flex;
@@ -25,6 +28,7 @@ nav a {
   color: #fff;
 }
 
+/* Book Styles */
 .book {
   border: 1px solid #ccc;
   padding: 1rem;
@@ -52,21 +56,10 @@ nav a {
   transition: background-color 0.3s ease;
 }
 
-.book button:hover {
-  background-color: #c9302c;
-}
-
 .form {
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
-}
-
-.form input {
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 .form button {
@@ -77,6 +70,17 @@ nav a {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.book button:hover {
+  background-color: #c9302c;
+}
+
+.form input {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .form button:hover {
