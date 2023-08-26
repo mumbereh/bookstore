@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => (
   <header>
-    <h2>Bookstore CMS</h2>
+    <h2>Bookstore Application</h2>
     <nav>
       <ul>
         <li>

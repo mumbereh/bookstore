@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Categories = () => (
-  <h1>Coming soon!</h1>
+  <h1>Loading................</h1>
 );
 
 export default Categories;

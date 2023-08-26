@@ -5,10 +5,7 @@ import Form from './Form';
 
 const Books = () => {
   const books = [
-    { id: uuidv4(), title: 'The Great Gatsby', author: 'Scott Fitzgerald' },
-    { id: uuidv4(), title: 'Moby Dick', author: 'Herman Melville' },
-    { id: uuidv4(), title: 'War and Peace', author: 'Leo Tolstoy' },
-    { id: uuidv4(), title: 'The Brothers Karamazov', author: 'Fyodor Dostoyevsky' },
+    { id: uuidv4(), title: 'Grown young', author: 'Sarango Mageya' },
   ];
 
   return (
