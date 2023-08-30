@@ -1,29 +1,30 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeBook, addBook } from '../redux/book/booksSlice';
 import Book from './Book';
 import Form from './Form';
 
 const Books = () => {
-  const [books, setBooks] = useState([
-    { id: uuidv4(), title: 'Grown young', author: 'Sarango Mageya' },
-  ]);
+  const books = useSelector(state => state.books.books);
+  const dispatch = useDispatch();
 
-  const addBook = (book) => {
-    setBooks([...books, { ...book, id: uuidv4() }]);
+  const handleRemove = (id) => {
+    dispatch(removeBook(id));
   };
 
-  const removeBook = (id) => {
-    setBooks(books.filter(book => book.id !== id));
+  const handleAddBook = (book) => {
+    dispatch(addBook(book));
   };
 
   return (
     <div className="books-container">
       <ul className="books">
         {books.map((book) => (
-          <Book key={book.id} title={book.title} author={book.author} onRemove={() => removeBook(book.id)} />
+          <Book key={book.id} title={book.title} author={book.author} onRemove={() => handleRemove(book.id)} />
         ))}
       </ul>
-      <Form addBook={addBook} />
+      <Form addBook={handleAddBook} />
+
     </div>
   );
 };
