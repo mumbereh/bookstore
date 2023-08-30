@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeBook, addBook } from '../redux/book/booksSlice';
+import { v4 as uuidv4 } from 'uuid'; 
 import Book from './Book';
-import Form from './Form'; // Assuming you have imported the Form component here
+import Form from './Form';
 
 const Books = () => {
   const books = useSelector(state => state.books.books);
@@ -13,7 +14,8 @@ const Books = () => {
   };
 
   const handleAddBook = (book) => {
-    dispatch(addBook(book));
+    const newBook = { ...book, item_id: uuidv4() };
+    dispatch(addBook(newBook));
   };
 
   return (
