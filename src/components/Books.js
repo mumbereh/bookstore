@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeBook, addBook } from '../redux/booksSlice';
+import { removeBook, addBook } from '../redux/book/booksSlice';
 import Book from './Book';
 import Form from './Form';
 
@@ -23,7 +23,7 @@ const Books = () => {
           <Book key={book.id} title={book.title} author={book.author} onRemove={() => handleRemove(book.id)} />
         ))}
       </ul>
-      <Form addBook={handleAddBook} />,
+      <Form addBook={handleAddBook} />
 
     </div>
   );
