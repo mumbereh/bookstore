@@ -7,9 +7,11 @@ const Form = ({ addBook }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    addBook({ title, author });
-    setTitle('');
-    setAuthor('');
+    if (title.trim() !== '' && author.trim() !== '') {
+      addBook({ title, author });
+      setTitle('');
+      setAuthor('');
+    }
   };
 
   return (
