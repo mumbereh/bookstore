@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Book = ({ id, title, author, onRemove }) => {
   const handleRemove = () => {
     onRemove(id);

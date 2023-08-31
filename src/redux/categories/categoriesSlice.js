@@ -16,7 +16,6 @@ const categoriesSlice = createSlice({
 
 export const { updateStatus } = categoriesSlice.actions;
 
-// Define and export the selector function
 export const selectCategoryStatus = (state) => state.categories.status;
 
 export default categoriesSlice.reducer;
