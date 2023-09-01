@@ -1,33 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeBook, addBook } from '../redux/book/booksSlice';
-import { v4 as uuidv4 } from 'uuid'; 
+import { fetchInitialBooks } from '../redux/book/booksSlice';
 import Book from './Book';
 import Form from './Form';
 
-const Books = () => {
-  const books = useSelector(state => state.books.books);
+const BooksPage = () => {
   const dispatch = useDispatch();
+  const books = useSelector((state) => state.books.books);
 
-  const handleRemove = (id) => {
-    dispatch(removeBook(id));
-  };
-
-  const handleAddBook = (book) => {
-    const newBook = { ...book, item_id: uuidv4() };
-    dispatch(addBook(newBook));
-  };
+  useEffect(() => {
+    dispatch(fetchInitialBooks());
+  }, [dispatch]);
 
   return (
-    <div className="books-container">
+    <>
       <ul className="books">
         {books.map((book) => (
-          <Book key={book.item_id} title={book.title} author={book.author} onRemove={() => handleRemove(book.item_id)} />
+          <Book
+            key={book.item_id}
+            id={book.item_id}
+            title={book.title}
+            author={book.author}
+            category={book.category}
+          />
         ))}
       </ul>
-      <Form addBook={handleAddBook} />
-    </div>
+      <Form />
+    </>
   );
 };
 
-export default Books;
+export default BooksPage;
