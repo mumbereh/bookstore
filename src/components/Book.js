@@ -4,11 +4,14 @@ import { useDispatch } from 'react-redux';
 import { removeBook } from '../redux/book/booksSlice';
 
 const Book = (props) => {
+  // Destructure props
   const {
     id, title, author, category,
   } = props;
+
   const dispatch = useDispatch();
 
+  // Event handler for removing a book
   const handleRemoveClick = () => {
     dispatch(removeBook(id));
   };
@@ -22,6 +25,7 @@ const Book = (props) => {
           <span className="author">{author}</span>
         </div>
         <div className="list-btn">
+          {/* Add comments for button purposes */}
           <button type="button">Comments</button>
           |
           <button
@@ -34,22 +38,26 @@ const Book = (props) => {
           <button type="button">Edit</button>
         </div>
       </div>
-      <div className="reading-progress">
-        <div className="progress" />
-        <div className="progress-percentage">
-          <span className="percentage">76%</span>
-          <span className="completed">Completed</span>
+      <div className="right-block">
+        <div className="reading-progress">
+          <div className="progress" />
+          <div className="progress-percentage">
+            <span className="percentage">63%</span>
+            <span className="completed">Completed</span>
+          </div>
         </div>
-      </div>
-      <div className="current-chapter">
-        <span className="heading">CURRENT CHAPTER</span>
-        <span className="chapter">Chapter 17</span>
-        <button type="button" className="update-btn">UPDATE PROGRESS</button>
+        <hr className="vertical-line" />
+        <div className="current-chapter">
+          <span className="heading">CURRENT CHAPTER</span>
+          <span className="chapter">Chapter 17</span>
+          <button type="button" className="update-btn">UPDATE PROGRESS</button>
+        </div>
       </div>
     </li>
   );
 };
 
+// Define PropTypes for the Book component
 Book.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,

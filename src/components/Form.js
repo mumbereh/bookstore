@@ -4,44 +4,43 @@ import { addBook } from '../redux/book/booksSlice';
 import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
-  const dispatch = useDispatch();
-  const [book, setBook] = useState({
-    title: '',
-    author: '',
-    category: '',
-  });
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [category, setCategory] = useState('');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setBook({
-      ...book,
-      [name]: value,
-    });
+  const dispatch = useDispatch();
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleAuthorChange = (e) => {
+    setAuthor(e.target.value);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
     dispatch(addBook({
-      id,
-      ...book,
+      item_id: id,
+      title,
+      author,
+      category,
     }));
-    setBook({
-      title: '',
-      author: '',
-      category: '',
-    });
+    setTitle('');
+    setAuthor('');
+    setCategory('');
   };
 
   const categories = [
-    'Science Fiction',
-    'Horror',
-    'Fantasy',
-    'Non-fiction',
-    'Historical Fiction',
-    'Self-Help',
-    'Graphic Novel',
-    'Other',
+    'Action',
+     'Fiction',
+      'Thriller',
+       'Mystery',
+        'Adventure',
+         'Biography',
+          'Anthology',
+           'Other',
   ];
 
   return (
@@ -49,28 +48,9 @@ const Form = () => {
       <hr />
       <h2 className="form-title">ADD NEW BOOK</h2>
       <form onSubmit={handleFormSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Book title"
-          value={book.title}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type="text"
-          name="author"
-          placeholder="Author"
-          value={book.author}
-          onChange={handleInputChange}
-          required
-        />
-        <select
-          name="category"
-          value={book.category}
-          onChange={handleInputChange}
-          required
-        >
+        <input type="text" placeholder="Book title" value={title} onChange={handleTitleChange} required />
+        <input type="text" placeholder="Author" value={author} onChange={handleAuthorChange} required />
+        <select value={category} onChange={(e) => setCategory(e.target.value)} required>
           <option value="" disabled>Category</option>
           {categories.map((cat) => (
             <option key={cat} value={cat}>{cat}</option>

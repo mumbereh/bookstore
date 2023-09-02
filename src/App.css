@@ -5,7 +5,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
 }
 
 #root {
@@ -51,12 +50,18 @@ header img {
 
 .books-link,
 .categories {
-  font-size: 1em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8em;
   letter-spacing: 1.9px;
-  color: #121212;
+  color: #f5f6fa;
+}
+
+.categories {
+  opacity: 0.5;
 }
 
 .logo {
+  font-family: 'Montserrat', sans-serif;
   font-size: 1.9em;
   font-weight: bold;
   color: #0290ff;
@@ -68,10 +73,9 @@ header img {
 
 .book {
   display: flex;
-  justify-content: space-between;
   margin-top: 1em;
   padding: 3%;
-  padding-right: 10%;
+  padding-right: 7%;
   background: #fff;
   border: 0.5px solid #e8e8e8;
   border-radius: 5px;
@@ -81,6 +85,7 @@ header img {
   display: flex;
   flex-direction: column;
   gap: 1em;
+  width: 45%;
 }
 
 .book-info {
@@ -90,6 +95,7 @@ header img {
 
 .category {
   opacity: 0.5;
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.9em;
   font-weight: bold;
   color: #121212;
@@ -132,11 +138,19 @@ form button {
 }
 
 .list-btn button {
+  font-family: 'Roboto Slab', serif;
   font-size: 0.9em;
   font-weight: 300;
   color: #4386bf;
   background: transparent;
   cursor: pointer;
+}
+
+.right-block {
+  display: flex;
+  justify-content: space-between;
+  width: 55%;
+  align-items: center;
 }
 
 .reading-progress {
@@ -170,24 +184,35 @@ form button {
 
 .completed {
   opacity: 0.5;
+  font-family: 'Montserrat', sans-serif;
   font-size: 0.9em;
   color: #121212;
+}
+
+.vertical-line {
+  width: 0.125em;
+  height: 4.375em;
+  border: 1px solid #e8e8e8;
+  margin: 2%;
 }
 
 .current-chapter {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 1em;
 }
 
 .heading {
   opacity: 0.5;
+  font-family: 'Roboto Slab', serif;
   font-size: 0.9em;
   font-weight: 300;
   color: #121212;
 }
 
 .chapter {
+  font-family: 'Roboto Slab', serif;
   font-size: 1em;
   font-weight: 300;
   letter-spacing: -0.4px;
@@ -195,7 +220,7 @@ form button {
 }
 
 .update-btn {
-  width: 13em;
+  width: 12em;
   border-radius: 3px;
   background-color: #0290ff;
   font-family: 'Roboto Slab', serif;
@@ -252,4 +277,48 @@ form select {
 
 .catego {
   margin-left: 5%;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    padding: 2% 0;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 1em;
+  }
+
+  header img {
+    width: 20px;
+    height: 20px;
+    padding: 3%;
+  }
+}
+
+
+@media (max-width: 480px) {
+  header {
+    padding: 2% 0;
+  }
+
+  .navbar {
+    gap: 0.5em;
+  }
+
+  .navbar ul {
+    gap: 0.5em;
+  }
+
+  header img {
+    width: 16px;
+    height: 16px;
+    padding: 2%;
+  }
 }

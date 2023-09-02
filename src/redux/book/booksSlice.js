@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const baseApiUrl = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/pSAp1ecgeQgiYDZ4m1ew/';
-// Async Thunks
+
 const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
   const response = await axios.get(`${baseApiUrl}books`);
   return response.data;
@@ -21,7 +21,7 @@ const removeBook = createAsyncThunk('books/removeBook', async (ITEM_ID) => {
 const initialState = {
   books: [],
   error: '',
-  loading: 'true',
+  loading: true,
 };
 
 export const booksSlice = createSlice({
@@ -63,7 +63,7 @@ export const booksSlice = createSlice({
           state.books.push(action.payload);
         } else {
           state.status = 'failed';
-          state.error = 'Unable to add record!';
+          state.error = 'Unable to connect!';
         }
       })
       .addCase(addBook.rejected, (state, action) => {
@@ -80,10 +80,10 @@ export const booksSlice = createSlice({
           state.status = 'succeeded';
           state.error = '';
           state.books = state.books.filter((bookId) => bookId.item_id !== action.payload);
-          if (state.books.length === 0) state.error = 'No result!';
+          if (state.books.length === 0) state.error = 'no book!';
         } else {
           state.status = 'failed';
-          state.error = 'Unable to remove book!';
+          state.error = 'Unavailable infor!';
         }
       })
       .addCase(removeBook.rejected, (state, action) => {

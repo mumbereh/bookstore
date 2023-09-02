@@ -13,20 +13,28 @@ const Books = () => {
   }, [dispatch]);
 
   const renderBooks = () => {
-    return books.map((book) => (
-      <Book
-        key={book.item_id}
-        id={book.item_id}
-        title={book.title}
-        author={book.author}
-        category={book.category}
-      />
-    ));
+    if (books.length === 0) {
+      return <p>No books available.</p>;
+    }
+
+    return (
+      <ul className="books">
+        {books.map((book) => (
+          <Book
+            key={book.item_id}
+            id={book.item_id}
+            title={book.title}
+            author={book.author}
+            category={book.category}
+          />
+        ))}
+      </ul>
+    );
   };
 
   return (
-    <div className="books-container">
-      <ul className="books">{renderBooks()}</ul>
+    <div>
+      {renderBooks()}
       <Form />
     </div>
   );
