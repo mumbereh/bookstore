@@ -5,55 +5,80 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Form = () => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [category, setCategory] = useState('');
+  const [book, setBook] = useState({
+    title: '',
+    author: '',
+    category: '',
+  });
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handleAuthorChange = (e) => {
-    setAuthor(e.target.value);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setBook({
+      ...book,
+      [name]: value,
+    });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const id = uuidv4();
     dispatch(addBook({
-      item_id: id,
-      title,
-      author,
-      category,
+      id,
+      ...book,
     }));
-    setTitle('');
-    setAuthor('');
-    setCategory('');
+    setBook({
+      title: '',
+      author: '',
+      category: '',
+    });
   };
 
   const categories = [
     'Science Fiction',
-     'Horror',
-      'Fantasy',
-       'Non-fiction',
-        'Historical Fiction',
-         'Self-Help',
-          'Graphic Novel',
-           'Other',
+    'Horror',
+    'Fantasy',
+    'Non-fiction',
+    'Historical Fiction',
+    'Self-Help',
+    'Graphic Novel',
+    'Other',
   ];
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <input type="text" placeholder="Book title" value={title} onChange={handleTitleChange} required />
-      <input type="text" placeholder="Author" value={author} onChange={handleAuthorChange} required />
-      <select value={category} onChange={(e) => setCategory(e.target.value)} required>
-        <option value="" disabled>Select a category</option>
-        {categories.map((cat) => (
-          <option key={cat} value={cat}>{cat}</option>
-        ))}
-      </select>
-      <button type="submit">ADD BOOK</button>
-    </form>
+    <div className="form-section">
+      <hr />
+      <h2 className="form-title">ADD NEW BOOK</h2>
+      <form onSubmit={handleFormSubmit}>
+        <input
+          type="text"
+          name="title"
+          placeholder="Book title"
+          value={book.title}
+          onChange={handleInputChange}
+          required
+        />
+        <input
+          type="text"
+          name="author"
+          placeholder="Author"
+          value={book.author}
+          onChange={handleInputChange}
+          required
+        />
+        <select
+          name="category"
+          value={book.category}
+          onChange={handleInputChange}
+          required
+        >
+          <option value="" disabled>Category</option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>{cat}</option>
+          ))}
+        </select>
+        <button type="submit">ADD BOOK</button>
+      </form>
+    </div>
   );
 };
 

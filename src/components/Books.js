@@ -1,33 +1,35 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchInitialBooks } from '../redux/book/booksSlice';
+import { fetchBooks } from '../redux/book/booksSlice';
 import Book from './Book';
 import Form from './Form';
 
-const BooksPage = () => {
+const Books = () => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.books.books);
 
   useEffect(() => {
-    dispatch(fetchInitialBooks());
+    dispatch(fetchBooks());
   }, [dispatch]);
 
+  const renderBooks = () => {
+    return books.map((book) => (
+      <Book
+        key={book.item_id}
+        id={book.item_id}
+        title={book.title}
+        author={book.author}
+        category={book.category}
+      />
+    ));
+  };
+
   return (
-    <>
-      <ul className="books">
-        {books.map((book) => (
-          <Book
-            key={book.item_id}
-            id={book.item_id}
-            title={book.title}
-            author={book.author}
-            category={book.category}
-          />
-        ))}
-      </ul>
+    <div className="books-container">
+      <ul className="books">{renderBooks()}</ul>
       <Form />
-    </>
+    </div>
   );
 };
 
-export default BooksPage;
+export default Books;

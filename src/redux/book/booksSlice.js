@@ -2,108 +2,96 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const baseApiUrl = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/pSAp1ecgeQgiYDZ4m1ew/';
-
 // Async Thunks
-export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
+const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
   const response = await axios.get(`${baseApiUrl}books`);
   return response.data;
 });
 
-export const addBook = createAsyncThunk('books/addBook', async (book) => {
+const addBook = createAsyncThunk('books/addBook', async (book) => {
   const response = await axios.post(`${baseApiUrl}books`, book);
   return response.data === 'Created' ? book : null;
 });
 
-export const removeBook = createAsyncThunk('books/removeBook', async (ITEM_ID) => {
+const removeBook = createAsyncThunk('books/removeBook', async (ITEM_ID) => {
   const response = await axios.delete(`${baseApiUrl}books/${ITEM_ID}`);
   return response.data === 'The book was deleted successfully!' ? ITEM_ID : null;
 });
 
-export const fetchInitialBooks = createAsyncThunk('books/fetchInitialBooks', async () => {
-  const response = await axios.get(`${baseApiUrl}books`);
-  return response.data;
-});
-
-// Initial State
 const initialState = {
   books: [],
   error: '',
-  loading: true,
+  loading: 'true',
 };
 
-// Slice
-const booksSlice = createSlice({
+export const booksSlice = createSlice({
   name: 'books',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, (state) => {
-        state.loading = 'loading';
+        state.status = 'loading';
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
-        state.loading = 'succeeded';
+        state.status = 'succeeded';
         if (action.payload !== '') {
+          const books = [];
           const keys = Object.keys(action.payload);
-          state.books = keys.map((bookId) => ({ item_id: bookId, ...action.payload[bookId][0] }));
+          keys.forEach((bookId) => {
+            books.push({ item_id: bookId, ...action.payload[bookId][0] });
+          });
+          state.books = books;
           if (state.books.length === 0) state.error = 'No result was found!';
         } else {
           state.error = 'No result was found!';
         }
       })
       .addCase(fetchBooks.rejected, (state, action) => {
-        state.loading = 'failed';
+        state.status = 'failed';
         state.error = action.error.message;
-      })
+      });
+
+    builder
       .addCase(addBook.pending, (state) => {
-        state.loading = 'loading';
+        state.status = 'loading';
       })
       .addCase(addBook.fulfilled, (state, action) => {
         if (action.payload !== null) {
-          state.loading = 'succeeded';
+          state.status = 'succeeded';
           state.error = '';
           state.books.push(action.payload);
         } else {
-          state.loading = 'failed';
+          state.status = 'failed';
           state.error = 'Unable to add record!';
         }
       })
       .addCase(addBook.rejected, (state, action) => {
-        state.loading = 'failed';
+        state.status = 'failed';
         state.error = action.error.message;
-      })
+      });
+
+    builder
       .addCase(removeBook.pending, (state) => {
-        state.loading = 'loading';
+        state.status = 'loading';
       })
       .addCase(removeBook.fulfilled, (state, action) => {
         if (action.payload !== null) {
-          state.loading = 'succeeded';
+          state.status = 'succeeded';
           state.error = '';
           state.books = state.books.filter((bookId) => bookId.item_id !== action.payload);
-          if (state.books.length === 0) state.error = 'No result was found!';
+          if (state.books.length === 0) state.error = 'No result!';
         } else {
-          state.loading = 'failed';
-          state.error = 'Unable to remove record!';
+          state.status = 'failed';
+          state.error = 'Unable to remove book!';
         }
       })
       .addCase(removeBook.rejected, (state, action) => {
-        state.loading = 'failed';
-        state.error = action.error.message;
-      })
-      .addCase(fetchInitialBooks.pending, (state) => {
-        state.loading = 'loading';
-      })
-      .addCase(fetchInitialBooks.fulfilled, (state, action) => {
-        state.loading = 'succeeded';
-        const keys = Object.keys(action.payload);
-        state.books = keys.map((bookId) => ({ item_id: bookId, ...action.payload[bookId][0] }));
-        if (state.books.length === 0) state.error = 'No result was found!';
-      })
-      .addCase(fetchInitialBooks.rejected, (state, action) => {
-        state.loading = 'failed';
+        state.status = 'failed';
         state.error = action.error.message;
       });
   },
 });
 
+export { addBook, fetchBooks, removeBook };
 export default booksSlice.reducer;
